@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProductoController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// ? Creamos los endpoints para la API de Categorías
 Route::apiResource( '/categorias', CategoriaController::class );
+
+// ? Creamos los endpoints para la API de Productos
+Route::apiResource( '/productos', ProductoController::class );
