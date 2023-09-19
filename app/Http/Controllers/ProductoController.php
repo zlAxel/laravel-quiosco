@@ -13,7 +13,8 @@ class ProductoController extends Controller {
      * Muestra una lista de los recursos.
      */
     public function index() {
-        return new ProductoCollection( Producto::where('available', true)->orderBy('id', 'DESC')->paginate( 10 ) );
+        // return new ProductoCollection( Producto::where('available', true)->orderBy('id', 'DESC')->paginate( 10 ) );
+        return new ProductoCollection( Producto::where('available', true)->orderBy('id', 'DESC')->get() );
     }
 
     /**
