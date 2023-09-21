@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 
@@ -26,3 +27,6 @@ Route::apiResource( '/categorias', CategoriaController::class );
 
 // ? Creamos los endpoints para la API de Productos
 Route::apiResource( '/productos', ProductoController::class );
+
+// ? Creamos la API para el registro de usuarios
+Route::post( 'register', [ AuthController::class, 'register' ]);
