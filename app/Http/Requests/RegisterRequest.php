@@ -26,4 +26,14 @@ class RegisterRequest extends FormRequest
             'password' => [ 'required', 'string', 'confirmed', PasswordRules::min(8)->letters()->mixedCase()->numbers()->symbols() ],
         ];
     }
+
+    public function messages(){
+        return [
+            'name.required' => 'El nombre no puede estar vacío.',
+            'email.required' => 'El correo electrónico no puede estar vacío.',
+            'password.required' => 'La contraseña no puede estar vacía.',
+            'password.confirmed' => 'Las contraseñas escritas no coinciden.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+        ];
+    }
 }
