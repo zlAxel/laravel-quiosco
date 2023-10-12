@@ -18,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group( function () {
+    Route::get('/user', function (Request $request){
+        return $request->user();
+    });
+    Route::post( '/logout', [ AuthController::class, 'logout' ]);
 });
 
 // ? Creamos los endpoints para la API de Categorías
@@ -30,3 +33,6 @@ Route::apiResource( '/productos', ProductoController::class );
 
 // ? Creamos la API para el registro de usuarios
 Route::post( 'register', [ AuthController::class, 'register' ]);
+
+// ? Creamos la API para el inicio de sesión de usuarios
+Route::post( 'login', [ AuthController::class, 'login' ]);

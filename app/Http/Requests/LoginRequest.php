@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password as PasswordRules;
 
-class RegisterRequest extends FormRequest
-{
+class LoginRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -21,20 +19,24 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array {
         return [
-            'name' => [ 'required', 'string', 'max:255' ],
-            'email' => [ 'required', 'string', 'email', 'max:255', 'unique:users' ],
-            'password' => [ 'required', 'string', 'confirmed', PasswordRules::min(8)->letters()->mixedCase()->numbers()->symbols() ],
+            'email' => ['required', 'email', 'exists:users,email'],
+            'password' => ['required'],
         ];
     }
 
+    /** 
+     * Asignamos los mensajes de error personalizados
+     * 
+     * @return array<string, string>
+     *  
+     */
+    
     public function messages(){
         return [
-            'name.required' => 'El nombre no puede estar vacío.',
             'email.required' => 'El correo electrónico no puede estar vacío.',
-            'email.unique' => 'El correo electrónico ya está registrado.',
+            'email.email' => 'El correo electrónico no es válido.',
+            'email.exists' => 'El correo electrónico no está registrado.',
             'password.required' => 'La contraseña no puede estar vacía.',
-            'password.confirmed' => 'Las contraseñas escritas no coinciden.',
-            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ];
     }
 }
