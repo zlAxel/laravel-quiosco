@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PedidoController;
 
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group( function () {
+    // ? Creamos la API para obtener los datos del usuario autenticado
     Route::get('/user', function (Request $request){
         return $request->user();
     });
-    Route::post( '/logout', [ AuthController::class, 'logout' ]);
+    Route::post( '/logout', [ AuthController::class, 'logout' ]); // * Creamos la API para el cierre de sesión de usuarios
+    
+    // ? Creamos la API para los pedidos
+    Route::apiResource( '/pedidos', PedidoController::class );
 });
 
 // ? Creamos los endpoints para la API de Categorías
